@@ -1,5 +1,11 @@
-#include "grove_tsl.h"
 #include "mbed.h"
+#include "grove_tsl.h"
+
+GroveTSL2561::GroveTSL2561(I2C &i2c) {
+    _addr = TSL2561_Address;
+    _i2c = &i2c;
+    _i2c.frequency(300);
+}
 
 GroveTSL2561::GroveTSL2561(PinName sda, PinName scl) : _i2c(sda, scl) {
     _addr = TSL2561_Address;
