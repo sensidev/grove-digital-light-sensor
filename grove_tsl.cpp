@@ -1,9 +1,8 @@
 #include "mbed.h"
 #include "grove_tsl.h"
 
-GroveTSL2561::GroveTSL2561(I2C &i2c) {
+GroveTSL2561::GroveTSL2561(I2C &i2c) : _i2c(i2c) {
     _addr = TSL2561_Address;
-    _i2c = &i2c;
     _i2c.frequency(300);
 }
 
@@ -49,8 +48,6 @@ void GroveTSL2561::getLux(void) {
 
     ch0 = (CH0_HIGH<<8) | CH0_LOW;
     ch1 = (CH1_HIGH<<8) | CH1_LOW;
-
-    pc.printf("getLux CH0 %x CH1 %x", ch0, ch1);
 }
 void GroveTSL2561::init() {
     writeRegister(TSL2561_Control, 0x03);  // POWER UP
