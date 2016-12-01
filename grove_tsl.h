@@ -73,6 +73,7 @@
 class GroveTSL2561
 {
 public:
+    GroveTSL2561::GroveTSL2561(I2C &i2c);
     GroveTSL2561(PinName sda, PinName scl);
     GroveTSL2561(PinName sda, PinName scl, int adr);
 
