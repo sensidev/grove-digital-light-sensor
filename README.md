@@ -1,7 +1,7 @@
 Grove - Digital Light Sensor
 ----------------------------
 
-This is an mbed library for grove digital light sensor.
+This is the grove digital light sensor library compatible with mbed5.
 
 Original code by Seeed-Studio:
 https://github.com/Seeed-Studio/Grove_Digital_Light_Sensor
