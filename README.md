@@ -1,5 +1,5 @@
 Grove - Digital Light Sensor
-----------------------------
+============================
 
 This is the grove digital light sensor library compatible with mbed5.
 
