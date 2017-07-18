@@ -2,17 +2,22 @@
 #include "grove_tsl.h"
 
 GroveTSL2561::GroveTSL2561(I2C &i2c) : _i2c(i2c) {
-    _addr = TSL2561_Address;
+    _adr = TSL2561_Address;
+    _i2c.frequency(300);
+}
+
+GroveTSL2561::GroveTSL2561(I2C &i2c, uint8_t adr) : _i2c(i2c) {
+    _adr = adr;
     _i2c.frequency(300);
 }
 
 GroveTSL2561::GroveTSL2561(PinName sda, PinName scl) : _i2c(sda, scl) {
-    _addr = TSL2561_Address;
+    _adr = TSL2561_Address;
     _i2c.frequency(300);
 }
 
-GroveTSL2561::GroveTSL2561(PinName sda, PinName scl, int addr) : _i2c(sda, scl) {
-    _addr = addr;
+GroveTSL2561::GroveTSL2561(PinName sda, PinName scl, uint8_t adr) : _i2c(sda, scl) {
+    _adr = adr;
     _i2c.frequency(300);
 }
 
@@ -22,8 +27,8 @@ uint8_t GroveTSL2561::readRegister(int reg) {
 
     reg_buf[0] = (char) reg;
 
-    _i2c.write(_addr, reg_buf, 1);
-    _i2c.read(_addr, data_read_buf, 1);
+    _i2c.write(_adr, reg_buf, 1);
+    _i2c.read(_adr, data_read_buf, 1);
 
     return (uint8_t) data_read_buf[0];
 }
@@ -32,10 +37,10 @@ void GroveTSL2561::writeRegister(int reg, uint8_t val) {
     char reg_buf[1];
 
     reg_buf[0] = (char) reg;
-    _i2c.write(_addr, reg_buf, 1);
+    _i2c.write(_adr, reg_buf, 1);
 
     reg_buf[0] = (char) val;
-    _i2c.write(_addr, reg_buf, 1);
+    _i2c.write(_adr, reg_buf, 1);
 }
 
 void GroveTSL2561::getLux(void) {

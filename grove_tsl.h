@@ -45,7 +45,6 @@
 #define M8T 0x0000   // 0.000 * 2^LUX_SCALE
 
 
-
 #define K1C 0x0043   // 0.130 * 2^RATIO_SCALE
 #define B1C 0x0204   // 0.0315 * 2^LUX_SCALE
 #define M1C 0x01ad   // 0.0262 * 2^LUX_SCALE
@@ -70,34 +69,43 @@
 #define K8C 0x029a   // 1.3 * 2^RATIO_SCALE
 #define B8C 0x0000   // 0.000 * 2^LUX_SCALE
 #define M8C 0x0000   // 0.000 * 2^LUX_SCALE
-class GroveTSL2561
-{
+
+class GroveTSL2561 {
 public:
     GroveTSL2561(I2C &i2c);
+
+    GroveTSL2561(I2C &i2c, uint8_t adr);
+
     GroveTSL2561(PinName sda, PinName scl);
-    GroveTSL2561(PinName sda, PinName scl, int adr);
+
+    GroveTSL2561(PinName sda, PinName scl, uint8_t adr);
 
     signed long readVisibleLux();
-    unsigned long calculateLux(unsigned int iGain, unsigned int tInt,int iType);
+
+    unsigned long calculateLux(unsigned int iGain, unsigned int tInt, int iType);
+
     void getLux(void);
+
     void init(void);
+
     uint8_t readRegister(int reg);
+
     void writeRegister(int reg, uint8_t val);
 
 private:
-    uint8_t CH0_LOW,CH0_HIGH,CH1_LOW,CH1_HIGH;
-    uint16_t ch0,ch1;
+    uint8_t CH0_LOW, CH0_HIGH, CH1_LOW, CH1_HIGH;
+    uint16_t ch0, ch1;
     unsigned long chScale;
     unsigned long channel1;
     unsigned long channel0;
-    unsigned long  ratio1;
+    unsigned long ratio1;
     unsigned int b;
     unsigned int m;
     unsigned long temp;
     unsigned long lux;
 
     I2C _i2c;
-    int _addr;
+    uint8_t _adr;
 };
 
 #endif
